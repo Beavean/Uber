@@ -41,15 +41,11 @@ final class LoginController: UIViewController {
                                        isSecureTextEntry: true)
     }()
     
-    private lazy var loginButton: UIButton = {
-        let button = UIButton(type: .system)
+    private lazy var loginButton: AuthButton = {
+        let button = AuthButton(type: .system)
         button.setTitle("Log In", for: .normal)
-        button.layer.cornerRadius = 5
-        button.backgroundColor = .mainBlueTint
-        button.setTitleColor(.white, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLogIn), for: .touchUpInside)
         return button
     }()
     
@@ -67,6 +63,28 @@ final class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    //MARK: - Selectors
+    
+    @objc private func handleLogIn() {
+        
+    }
+    
+    @objc private func handleShowSignUp() {
+        let controller = SignUpController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    //MARK: - Helpers
+    
+    private func configureUI() {
+        configureNavigationBar()
         view.backgroundColor = .backgroundColor
         view.addSubview(titleLabel)
         titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor)
@@ -89,23 +107,9 @@ final class LoginController: UIViewController {
         dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 24, height: 32)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    private func configureNavigationBar() {
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.barStyle = .black
     }
-    
-    //MARK: - Selectors
-    
-    @objc private func handleLogin() {
-        
-    }
-    
-    @objc private func handleShowSignUp() {
-        
-    }
-    
-    //MARK: - Helpers
-    
-    
-    
 }
 

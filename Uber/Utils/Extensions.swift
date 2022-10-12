@@ -76,7 +76,7 @@ extension UIView {
         let imageView = UIImageView()
         imageView.image = image
         imageView.alpha = 0.87
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .white
         view.addSubview(imageView)
         

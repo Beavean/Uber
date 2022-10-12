@@ -12,6 +12,8 @@
 		080FBDB928F5634700D71902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 080FBDB828F5634700D71902 /* Assets.xcassets */; };
 		080FBDBC28F5634700D71902 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 080FBDBA28F5634700D71902 /* LaunchScreen.storyboard */; };
 		080FBDCD28F5759900D71902 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FBDCC28F5759900D71902 /* Extensions.swift */; };
+		080FBDF528F6E3B800D71902 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FBDF428F6E3B700D71902 /* SignUpController.swift */; };
+		080FBDF728F6EE1B00D71902 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FBDF628F6EE1B00D71902 /* AuthButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		080FBDBB28F5634700D71902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		080FBDBD28F5634700D71902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		080FBDCC28F5759900D71902 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		080FBDF428F6E3B700D71902 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		080FBDF628F6EE1B00D71902 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				080FBDB328F5634500D71902 /* LoginController.swift */,
+				080FBDF428F6E3B700D71902 /* SignUpController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -93,6 +98,7 @@
 		080FBDCA28F56A6500D71902 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				080FBDF628F6EE1B00D71902 /* AuthButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,8 +181,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				080FBDB428F5634500D71902 /* LoginController.swift in Sources */,
+				080FBDF728F6EE1B00D71902 /* AuthButton.swift in Sources */,
 				080FBDCD28F5759900D71902 /* Extensions.swift in Sources */,
 				080FBDB028F5634500D71902 /* AppDelegate.swift in Sources */,
+				080FBDF528F6E3B800D71902 /* SignUpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
