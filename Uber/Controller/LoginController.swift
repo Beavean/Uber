@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginController: UIViewController {
+final class LoginController: UIViewController {
     
     //MARK: - Properties
     
@@ -20,42 +20,73 @@ class LoginController: UIViewController {
     }()
     
     private lazy var emailContainerView: UIView = {
-        let view = UIView()
-        let imageView = UIImageView()
-        view.addSubview(imageView)
-        imageView.centerY(inView: view)
-        imageView.anchor(left: view.leftAnchor, paddingLeft: 8, width: 24, height: 24)
-        imageView.contentMode = .scaleAspectFill
-        view.addSubview(emailTextField)
-        emailTextField.anchor(left: imageView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 8)
-        emailTextField.centerY(inView: view)
-        let separatorView = UIView()
-        separatorView.backgroundColor = .lightGray
-        view.addSubview(separatorView)
-        separatorView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingRight: 8, height: 1)
+        let view = UIView().inputContainerView(image: UIImage(systemName: "envelope") , textField: emailTextField)
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return view
+    }()
+    
+    private lazy var passwordContainerView: UIView = {
+        let view = UIView().inputContainerView(image: UIImage(systemName: "lock"), textField: passwordTextField)
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return view
     }()
     
     private let emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.textColor = .white
-        textField.keyboardAppearance = .dark
-        textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        return textField
+        return UITextField().textField(withPlaceholder: "Email",
+                                       isSecureTextEntry: false)
+    }()
+    
+    private let passwordTextField: UITextField = {
+        return UITextField().textField(withPlaceholder: "Password",
+                                       isSecureTextEntry: true)
+    }()
+    
+    private lazy var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Log In", for: .normal)
+        button.layer.cornerRadius = 5
+        button.backgroundColor = .mainBlueTint
+        button.setTitleColor(.white, for: .normal)
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var dontHaveAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.mainBlueTint]))
+        
+        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        return button
     }()
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.init(red: 25/255, green: 25/255, blue: 25/255, alpha: 1)
+        view.backgroundColor = .backgroundColor
         view.addSubview(titleLabel)
         titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor)
         titleLabel.centerX(inView: view)
-        view.addSubview(emailContainerView)
-        emailContainerView.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40, paddingLeft: 16, paddingRight: 16, height: 50)
+        
+        let stack = UIStackView(arrangedSubviews: [emailContainerView,
+                                                   passwordContainerView,
+                                                   loginButton])
+        stack.axis = .vertical
+        stack.distribution = .fillEqually
+        stack.spacing = 24
+        
+        view.addSubview(stack)
+        stack.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor,
+                     right: view.rightAnchor, paddingTop: 40, paddingLeft: 16,
+                     paddingRight: 16)
+        
+        view.addSubview(dontHaveAccountButton)
+        dontHaveAccountButton.centerX(inView: view)
+        dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 24, height: 32)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -64,10 +95,17 @@ class LoginController: UIViewController {
     
     //MARK: - Selectors
     
+    @objc private func handleLogin() {
+        
+    }
+    
+    @objc private func handleShowSignUp() {
+        
+    }
     
     //MARK: - Helpers
     
-
-
+    
+    
 }
 
