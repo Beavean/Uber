@@ -97,7 +97,7 @@ extension UIView {
             
             view.addSubview(segmentedControl)
             segmentedControl.anchor(left: view.leftAnchor, right: view.rightAnchor,
-                     paddingLeft: 8, paddingRight: 8)
+                                    paddingLeft: 8, paddingRight: 8)
             segmentedControl.centerY(inView: view, constant: 8)
         }
         
@@ -135,4 +135,35 @@ extension UIColor {
     static let outlineStrokeColor = UIColor.rgb(red: 234, green: 46, blue: 111)
     static let trackStrokeColor = UIColor.rgb(red: 56, green: 25, blue: 49)
     static let pulsatingFillColor = UIColor.rgb(red: 86, green: 30, blue: 63)
+}
+
+extension UIViewController {
+    
+    func showError(_ error: Error) {
+        DispatchQueue.main.async {
+            let alertVC = UIAlertController(
+                title: "Error",
+                message: "\(error.localizedDescription)",
+                preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertVC.addAction(action)
+            self.present(alertVC, animated: true, completion: nil)
+        }
+    }
+    
+    func showMessage(_ message: String, completion: (() -> Void)? = nil) {
+        DispatchQueue.main.async {
+            let alertVC = UIAlertController(
+                title: nil,
+                message: message,
+                preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default) { action in
+                if let completion = completion {
+                    completion()
+                }
+            }
+            alertVC.addAction(action)
+            self.present(alertVC, animated: true, completion: nil)
+        }
+    }
 }

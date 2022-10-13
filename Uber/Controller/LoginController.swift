@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 final class LoginController: UIViewController {
     
@@ -73,7 +74,20 @@ final class LoginController: UIViewController {
     //MARK: - Selectors
     
     @objc private func handleLogIn() {
-        
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text
+        else { return }
+        Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
+            if let error = error {
+                self?.showError(error)
+            } else {
+                self?.showMessage("Successfully Logged In") {
+                    guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController else { return }
+                    controller.configureUI()
+                    self?.dismiss(animated: true)
+                }
+            }
+        })
     }
     
     @objc private func handleShowSignUp() {
