@@ -109,6 +109,13 @@ extension UIView {
         
         return view
     }
+    
+    func addShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.6
+        layer.shadowOffset = CGSize(width: 1, height: 1)
+        layer.masksToBounds = false
+    }
 }
 
 extension UITextField {
