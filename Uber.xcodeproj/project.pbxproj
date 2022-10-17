@@ -14,6 +14,7 @@
 		080FBDCD28F5759900D71902 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FBDCC28F5759900D71902 /* Extensions.swift */; };
 		080FBDF528F6E3B800D71902 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FBDF428F6E3B700D71902 /* SignUpController.swift */; };
 		080FBDF728F6EE1B00D71902 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FBDF628F6EE1B00D71902 /* AuthButton.swift */; };
+		0820BF8628FD58D200445D0C /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820BF8528FD58D200445D0C /* LocationCell.swift */; };
 		08F503E028F813F800E254D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08F503DF28F813F800E254D2 /* GoogleService-Info.plist */; };
 		08F503E228F82AE400E254D2 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F503E128F82AE400E254D2 /* HomeController.swift */; };
 		08F503E428F85E6C00E254D2 /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F503E328F85E6C00E254D2 /* LocationInputActivationView.swift */; };
@@ -31,6 +32,7 @@
 		080FBDCC28F5759900D71902 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		080FBDF428F6E3B700D71902 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		080FBDF628F6EE1B00D71902 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		0820BF8528FD58D200445D0C /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		08F503DF28F813F800E254D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08F503E128F82AE400E254D2 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		08F503E328F85E6C00E254D2 /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
@@ -124,8 +126,9 @@
 			isa = PBXGroup;
 			children = (
 				080FBDF628F6EE1B00D71902 /* AuthButton.swift */,
-				08F503E528F86A9400E254D2 /* LocationInputView.swift */,
 				08F503E328F85E6C00E254D2 /* LocationInputActivationView.swift */,
+				08F503E528F86A9400E254D2 /* LocationInputView.swift */,
+				0820BF8528FD58D200445D0C /* LocationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				08F503E228F82AE400E254D2 /* HomeController.swift in Sources */,
 				080FBDCD28F5759900D71902 /* Extensions.swift in Sources */,
 				080FBDB028F5634500D71902 /* AppDelegate.swift in Sources */,
+				0820BF8628FD58D200445D0C /* LocationCell.swift in Sources */,
 				08F503E628F86A9400E254D2 /* LocationInputView.swift in Sources */,
 				080FBDF528F6E3B800D71902 /* SignUpController.swift in Sources */,
 			);
