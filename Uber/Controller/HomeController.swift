@@ -16,7 +16,7 @@ final class HomeController: UIViewController {
     //MARK: - Properties
     
     private let mapView = MKMapView()
-    private let locationManager = CLLocationManager()
+    private let locationManager = LocationHandler.shared.locationManager
     private let inputActivationView = LocationInputActivationView()
     private let locationInputView = LocationInputView()
     private let tableView = UITableView()
@@ -30,16 +30,24 @@ final class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
-        view.backgroundColor = .red
         enableLocationServices()
         fetchUserData()
+        fetchDrivers()
     }
     
     //MARK: - API
     
     private func fetchUserData() {
-        Service.shared.fetchUserData { user in
+        guard let currentUid = Auth.auth().currentUser?.uid else { return  }
+        Service.shared.fetchUserData(uid: currentUid) { user in
             self.user = user
+        }
+    }
+    
+    private func fetchDrivers() {
+        guard let location = locationManager?.location else { return }
+        Service.shared.fetchDrivers(location: location) { user in
+            print("DEBUG: Driver is  \(user.fullName)")
         }
     }
     
@@ -118,30 +126,25 @@ final class HomeController: UIViewController {
 
 //MARK: - Location Services
 
-extension HomeController: CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            locationManager.requestAlwaysAuthorization()
-            
-        }
-    }
+extension HomeController {
     
     private func enableLocationServices() {
-        switch locationManager.authorizationStatus {
+        switch locationManager?.authorizationStatus {
         case .authorizedAlways:
             print("DEBUG: Authorised always")
-            locationManager.startUpdatingLocation()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager?.startUpdatingLocation()
+            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         case .authorizedWhenInUse:
             print("DEBUG: Authorised when in use")
-            locationManager.requestAlwaysAuthorization()
+            locationManager?.requestAlwaysAuthorization()
         case .denied:
             break
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+            locationManager?.requestWhenInUseAuthorization()
             print("DEBUG: Not determined")
         case .restricted:
+            break
+        case .none:
             break
         @unknown default:
             break
