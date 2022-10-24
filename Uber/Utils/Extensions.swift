@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 extension UIView {
     
@@ -146,10 +147,10 @@ extension UIColor {
 
 extension UIViewController {
     
-    func showError(_ error: Error) {
+    func showAlert(title: String = "Error", error: Error) {
         DispatchQueue.main.async {
             let alertVC = UIAlertController(
-                title: "Error",
+                title: title,
                 message: "\(error.localizedDescription)",
                 preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -171,6 +172,20 @@ extension UIViewController {
             }
             alertVC.addAction(action)
             self.present(alertVC, animated: true, completion: nil)
+        }
+    }
+}
+
+extension MKPlacemark {
+    var address: String? {
+        get {
+            guard let subThoroughfare,
+                  let thoroughfare,
+                  let locality,
+                  let administrativeArea
+            else { return nil }
+            return "\(subThoroughfare) \(thoroughfare), \(locality), \(administrativeArea)"
+            
         }
     }
 }

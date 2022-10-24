@@ -79,11 +79,11 @@ final class LoginController: UIViewController {
         else { return }
         Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
             if let error = error {
-                self?.showError(error)
+                self?.showAlert(error: error)
             } else {
                 self?.showMessage("Successfully Logged In") {
                     guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController else { return }
-                    controller.configureUI()
+                    controller.configure()
                     self?.dismiss(animated: true)
                 }
             }

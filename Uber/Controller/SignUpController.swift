@@ -113,7 +113,7 @@ class SignUpController: UIViewController {
         let accountTypeIndex = accountTypeSegmentedControl.selectedSegmentIndex
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
             if let error = error {
-                self?.showError(error)
+                self?.showAlert(error: error)
             } else {
                 guard let uid = result?.user.uid else { return }
                 let values = ["email": email,
@@ -140,11 +140,11 @@ class SignUpController: UIViewController {
     private func uploadUserDataAndShowHomeController(uid: String, values: [String: Any]) {
         REF_USERS.child(uid).updateChildValues(values) { [weak self] error, reference in
             if let error = error {
-                self?.showError(error)
+                self?.showAlert(error: error)
             } else {
                 self?.showMessage("Registration successful") {
                     guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController else { return }
-                    controller.configureUI()
+                    controller.configure()
                     self?.dismiss(animated: true)
                 }
             }

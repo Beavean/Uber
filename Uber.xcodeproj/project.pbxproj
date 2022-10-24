@@ -136,9 +136,9 @@
 			isa = PBXGroup;
 			children = (
 				080FBDF628F6EE1B00D71902 /* AuthButton.swift */,
+				0820BF8528FD58D200445D0C /* LocationCell.swift */,
 				08F503E328F85E6C00E254D2 /* LocationInputActivationView.swift */,
 				08F503E528F86A9400E254D2 /* LocationInputView.swift */,
-				0820BF8528FD58D200445D0C /* LocationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
