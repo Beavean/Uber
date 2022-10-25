@@ -6,10 +6,18 @@
 //
 
 import UIKit
+import MapKit
 
 class RideActionView: UIView {
     
     //MARK: - Properties
+    
+    var destination: MKPlacemark? {
+        didSet {
+            titleLabel.text = destination?.name
+            addressLabel.text = destination?.address
+        }
+    }
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -49,7 +57,7 @@ class RideActionView: UIView {
         return label
     }()
     
-    private let actionButton: UIButton = {
+    private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .black
         button.setTitle("CONFIRM UBERX", for: .normal)
