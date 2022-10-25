@@ -19,6 +19,7 @@
 		0820BF8A28FDF0C900445D0C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820BF8928FDF0C900445D0C /* User.swift */; };
 		0820BF8C28FECD0B00445D0C /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820BF8B28FECD0B00445D0C /* LocationHandler.swift */; };
 		0820BF8E28FF3F0300445D0C /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820BF8D28FF3F0300445D0C /* DriverAnnotation.swift */; };
+		08E842302907EEA900A09645 /* RideActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8422F2907EEA900A09645 /* RideActionView.swift */; };
 		08F503E028F813F800E254D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08F503DF28F813F800E254D2 /* GoogleService-Info.plist */; };
 		08F503E228F82AE400E254D2 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F503E128F82AE400E254D2 /* HomeController.swift */; };
 		08F503E428F85E6C00E254D2 /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F503E328F85E6C00E254D2 /* LocationInputActivationView.swift */; };
@@ -41,6 +42,7 @@
 		0820BF8928FDF0C900445D0C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0820BF8B28FECD0B00445D0C /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		0820BF8D28FF3F0300445D0C /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
+		08E8422F2907EEA900A09645 /* RideActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideActionView.swift; sourceTree = "<group>"; };
 		08F503DF28F813F800E254D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08F503E128F82AE400E254D2 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		08F503E328F85E6C00E254D2 /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				080FBDF628F6EE1B00D71902 /* AuthButton.swift */,
+				08E8422F2907EEA900A09645 /* RideActionView.swift */,
 				0820BF8528FD58D200445D0C /* LocationCell.swift */,
 				08F503E328F85E6C00E254D2 /* LocationInputActivationView.swift */,
 				08F503E528F86A9400E254D2 /* LocationInputView.swift */,
@@ -288,6 +291,7 @@
 				0820BF8828FDEB4A00445D0C /* Service.swift in Sources */,
 				08F503E628F86A9400E254D2 /* LocationInputView.swift in Sources */,
 				080FBDF528F6E3B800D71902 /* SignUpController.swift in Sources */,
+				08E842302907EEA900A09645 /* RideActionView.swift in Sources */,
 				0820BF8A28FDF0C900445D0C /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
