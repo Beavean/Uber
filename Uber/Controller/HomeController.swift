@@ -186,7 +186,7 @@ final class HomeController: UIViewController {
     
     private func configureRideActionView() {
         view.addSubview(rideActionView)
-        let height = view.frame.height - locationInputViewHeight
+        rideActionView.delegate = self
         rideActionView.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: rideActionViewHeight)
     }
     
@@ -385,6 +385,20 @@ extension HomeController: UITableViewDataSource, UITableViewDelegate {
             let annotations = self.mapView.annotations.filter({ !$0.isKind(of: DriverAnnotation.self) })
             self.mapView.zoomToFit(annotations: annotations)
             self.animateRideActionView(shouldShow: true, destination: selectedPlacemark)
+        }
+    }
+}
+
+extension HomeController: RideActionViewDelegate {
+    func uploadTrip(_ view: RideActionView) {
+        guard let pickupCoordinates = locationManager?.location?.coordinate,
+              let destinationCoordinates = view.destination?.coordinate else { return }
+        Service.shared.uploadTrip(pickupCoordinates, destinationCoordinates) { error, reference in
+            if let error {
+                self.showAlert(title: "Failed to upload trip", error: error)
+                return
+            }
+            print("DEBUG: Trip has been uploaded")
         }
     }
 }
