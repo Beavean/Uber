@@ -196,8 +196,8 @@ extension UIViewController {
             label.alpha = 0.87
             
             view.addSubview(loadingView)
-            view.addSubview(indicator)
-            view.addSubview(label)
+            loadingView.addSubview(indicator)
+            loadingView.addSubview(label)
             
             label.centerX(inView: view)
             label.anchor(top: indicator.bottomAnchor, paddingTop: 32)
@@ -209,11 +209,11 @@ extension UIViewController {
         } else {
             view.subviews.forEach { subview in
                 if subview.tag == 1 {
-                    UIView.animate(withDuration: 0.3) {
+                    UIView.animate(withDuration: 0.3, animations: {
                         subview.alpha = 0
-                    } completion: { _ in
+                    }, completion: { _ in
                         subview.removeFromSuperview()
-                    }
+                    })
                 }
             }
         }
