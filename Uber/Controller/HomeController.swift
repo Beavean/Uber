@@ -57,6 +57,7 @@ final class HomeController: UIViewController {
             guard let trip else { return }
             let controller = PickupController(trip: trip)
             controller.modalPresentationStyle = .fullScreen
+            controller.delegate = self
             self.present(controller, animated: true)
         }
     }
@@ -75,8 +76,10 @@ final class HomeController: UIViewController {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
         enableLocationServices()
-//        signOut()
+        //        signOut()
     }
+    
+    
     
     //MARK: - Selectors
     
@@ -417,16 +420,31 @@ extension HomeController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+//MARK: - RideActionViewDelegate
+
 extension HomeController: RideActionViewDelegate {
     func uploadTrip(_ view: RideActionView) {
         guard let pickupCoordinates = locationManager?.location?.coordinate,
               let destinationCoordinates = view.destination?.coordinate else { return }
+        shouldPresentLoadingView(true, message: "Finding you a ride...")
         Service.shared.uploadTrip(pickupCoordinates, destinationCoordinates) { [weak self] error, reference in
             if let error {
                 self?.showAlert(title: "Failed to upload trip", error: error)
                 return
             }
-            print("DEBUG: Trip has been uploaded")
+            UIView.animate(withDuration: 0.3) {
+                guard let hideHeight = self?.view.frame.height else { return }
+                self?.rideActionView.frame.origin.y = hideHeight
+            }
         }
+    }
+}
+
+//MARK: - PickupControllerDelegate
+
+extension HomeController: PickupControllerDelegate {
+    func didAcceptTrip(_ trip: Trip) {
+        self.trip?.state = .accepted
+        self.dismiss(animated: true)
     }
 }
