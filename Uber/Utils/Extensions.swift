@@ -159,10 +159,10 @@ extension UIViewController {
         }
     }
     
-    func showMessage(_ message: String, completion: (() -> Void)? = nil) {
+    func showMessage(_ message: String, withTitle title: String? = nil, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
             let alertVC = UIAlertController(
-                title: nil,
+                title: title,
                 message: message,
                 preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default) { action in

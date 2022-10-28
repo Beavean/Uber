@@ -111,6 +111,10 @@ final class HomeController: UIViewController {
             self?.trip = trip
             if trip.state == .accepted {
                 self?.shouldPresentLoadingView(false)
+                guard let driverUid = trip.driverUid else { return }
+                Service.shared.fetchUserData(uid: driverUid) { driver in
+                    self?.animateRideActionView(shouldShow: true, config: .tripAccepted, user: driver)
+                }
             }
         }
     }
@@ -256,16 +260,20 @@ final class HomeController: UIViewController {
         }, completion: completion)
     }
     
-    private func animateRideActionView(shouldShow: Bool, destination: MKPlacemark? = nil, config: RideActionViewConfiguration? = nil) {
+    private func animateRideActionView(shouldShow: Bool, destination: MKPlacemark? = nil, config: RideActionViewConfiguration? = nil, user: User? = nil) {
         let yOrigin = shouldShow ? self.view.frame.height - self.rideActionViewHeight : self.view.frame.height
         UIView.animate(withDuration: 0.3) {
             self.rideActionView.frame.origin.y = yOrigin
         }
         if shouldShow {
             guard let config else { return }
+            if let destination {
+                rideActionView.destination = destination
+            }
+            if let user {
+                rideActionView.user = user
+            }
             rideActionView.configureUI(withConfig: config)
-            guard let destination else { return }
-            rideActionView.destination = destination
         }
     }
 }
@@ -317,6 +325,12 @@ private extension HomeController {
         if mapView.overlays.count > 0 {
             mapView.removeOverlay(mapView.overlays[0])
         }
+    }
+    
+    private func centerMapOnUserLocation() {
+        guard let coordinate = locationManager?.location?.coordinate else { return }
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 2000, longitudinalMeters: 200)
+        mapView.setRegion(region, animated: true)
     }
 }
 
@@ -433,7 +447,7 @@ extension HomeController: UITableViewDataSource, UITableViewDelegate {
             self?.mapView.selectAnnotation(annotation, animated: true)
             guard let annotations = self?.mapView.annotations.filter({ !$0.isKind(of: DriverAnnotation.self) }) else { return }
             self?.mapView.zoomToFit(annotations: annotations)
-            self?.animateRideActionView(shouldShow: true, destination: selectedPlacemark)
+            self?.animateRideActionView(shouldShow: true, destination: selectedPlacemark, config: .requestRide)
         }
     }
 }
@@ -456,6 +470,20 @@ extension HomeController: RideActionViewDelegate {
             }
         }
     }
+    
+    func cancelTrip() {
+        Service.shared.cancelTrip { [weak self] error, reference in
+            if let error {
+                self?.showAlert(title: "Failed to cancel trip", error: error)
+                return
+            }
+            self?.centerMapOnUserLocation()
+            self?.animateRideActionView(shouldShow: false)
+            self?.removeAnnotationsAndOverlays()
+            self?.actionButton.setImage(UIImage(systemName: "line.3.horizontal"), for: .normal)
+            self?.actionButtonConfig = .showMenu
+        }
+    }
 }
 
 //MARK: - PickupControllerDelegate
@@ -469,8 +497,16 @@ extension HomeController: PickupControllerDelegate {
         let mapItem = MKMapItem(placemark: placemark)
         generatePolyline(toDestination: mapItem)
         mapView.zoomToFit(annotations: mapView.annotations)
+        Service.shared.observeTripCancelled(trip: trip) {
+            self.removeAnnotationsAndOverlays()
+            self.animateRideActionView(shouldShow: false)
+            self.centerMapOnUserLocation()
+            self.showMessage("The trip has been cancelled.", withTitle: "Sorry")
+        }
         self.dismiss(animated: true) {
-            self.animateRideActionView(shouldShow: true, config: .tripAccepted)
+            Service.shared.fetchUserData(uid: trip.passengerUid) { passenger in
+                self.animateRideActionView(shouldShow: true, config: .tripAccepted, user: passenger)
+            }
         }
     }
 }
