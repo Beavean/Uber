@@ -11,12 +11,13 @@ import MapKit
 protocol RideActionViewDelegate: AnyObject {
     func uploadTrip(_ view: RideActionView)
     func cancelTrip()
-
+    
 }
 
 enum RideActionViewConfiguration {
     case requestRide
     case tripAccepted
+    case driverArrived
     case pickupPassenger
     case tripInProgress
     case endTrip
@@ -57,9 +58,12 @@ class RideActionView: UIView {
     
     //MARK: - Properties
     
-    var config = RideActionViewConfiguration()
     var buttonAction = ButtonAction()
     weak var delegate: RideActionViewDelegate?
+    var user: User?
+    var config = RideActionViewConfiguration() {
+        didSet { configureUI(withConfig: config) }
+    }
     
     var destination: MKPlacemark? {
         didSet {
@@ -67,8 +71,6 @@ class RideActionView: UIView {
             addressLabel.text = destination?.address
         }
     }
-    
-    var user: User?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -179,7 +181,7 @@ class RideActionView: UIView {
     
     //MARK: - Helpers
     
-    func configureUI(withConfig config: RideActionViewConfiguration) {
+    private func configureUI(withConfig config: RideActionViewConfiguration) {
         switch config {
         case .requestRide:
             buttonAction = .requestRide
@@ -197,6 +199,12 @@ class RideActionView: UIView {
             }
             infoViewLabel.text = String(user.fullName.first ?? "X")
             uberInfoLabel.text = user.fullName
+        case .driverArrived:
+            guard let user else { return }
+            if user.accountType == .driver {
+                titleLabel.text = "Driver has arrived"
+                addressLabel.text = "Please meet driver at pickup location"
+            }
         case .pickupPassenger:
             titleLabel.text = "Arrived at passenger location"
             buttonAction = .pickup
