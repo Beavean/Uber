@@ -25,3 +25,4 @@ class LocationHandler: NSObject, CLLocationManagerDelegate {
         }
     }
 }
+;
