@@ -74,7 +74,7 @@ class PickupController: UIViewController {
     }
     
     @objc private func handleAcceptTrip() {
-        Service.shared.acceptTrip(trip: trip) { [weak self] error, reference in
+        DriverService.shared.acceptTrip(trip: trip) { [weak self] error, reference in
             guard let trip = self?.trip else { return }
             self?.delegate?.didAcceptTrip(trip)
         }
