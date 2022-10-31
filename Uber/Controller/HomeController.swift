@@ -51,7 +51,7 @@ final class HomeController: UIViewController {
         didSet { self.tableView.reloadData() }
     }
     
-    private var user: User? {
+    var user: User? {
         didSet {
             locationInputView.user = user
             if user?.accountType == .passenger {
@@ -95,8 +95,6 @@ final class HomeController: UIViewController {
         enableLocationServices()
         //        signOut()
     }
-    
-    
     
     //MARK: - Selectors
     
@@ -212,13 +210,6 @@ final class HomeController: UIViewController {
     
     //MARK: - Shared API
     
-    private func fetchUserData() {
-        guard let currentUid = Auth.auth().currentUser?.uid else { return  }
-        Service.shared.fetchUserData(uid: currentUid) { [weak self] user in
-            self?.user = user
-        }
-    }
-    
     private func checkIfUserIsLoggedIn() {
         if let _ = Auth.auth().currentUser?.uid {
             configure()
@@ -243,7 +234,6 @@ final class HomeController: UIViewController {
     
     func configure() {
         configureUI()
-        fetchUserData()
     }
     
     private func configureActionButton(config: ActionButtonConfiguration) {

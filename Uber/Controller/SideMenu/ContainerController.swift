@@ -6,26 +6,40 @@
 //
 
 import UIKit
+import Firebase
 
 class ContainerController: UIViewController {
     
     //MARK: - Properties
     
     private let homeController = HomeController()
-    private var menuController = MenuController()
+    private var menuController: MenuController!
     private var isExpanded = false
+    var user: User? {
+        didSet {
+            guard let user else { return }
+            homeController.user = user
+            configureMenuController(withUser: user)
+        }
+    }
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .backgroundColor
         configureHomeController()
-        configureMenuController()
+        fetchUserData()
     }
     
-    //MARK: - Selectors
+    //MARK: - API
     
-    
+    private func fetchUserData() {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return  }
+        Service.shared.fetchUserData(uid: currentUid) { [weak self] user in
+            self?.user = user
+        }
+    }
     
     //MARK: - Helpers
     
@@ -36,10 +50,12 @@ class ContainerController: UIViewController {
         homeController.delegate = self
     }
     
-    private func configureMenuController() {
+    private func configureMenuController(withUser user: User) {
+        menuController = MenuController(user: user)
         addChild(menuController)
         menuController.didMove(toParent: self)
         view.insertSubview(menuController.view, at: 0)
+        menuController.view.frame = CGRect(x: 0, y: 40, width: self.view.frame.width, height: self.view.frame.height - 40)
     }
     
     private func animateMenu(shouldExpand: Bool) {
