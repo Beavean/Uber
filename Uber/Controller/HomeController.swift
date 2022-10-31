@@ -26,6 +26,10 @@ private enum AnnotationType: String {
     case destination
 }
 
+protocol HomeControllerDelegate: AnyObject {
+    func handleMenuToggle()
+}
+
 final class HomeController: UIViewController {
     
     //MARK: - Properties
@@ -40,6 +44,8 @@ final class HomeController: UIViewController {
     private let inputActivationView = LocationInputActivationView()
     private let locationInputView = LocationInputView()
     private let tableView = UITableView()
+    
+    weak var delegate: HomeControllerDelegate?
     
     private var searchResults = [MKPlacemark]() {
         didSet { self.tableView.reloadData() }
@@ -97,7 +103,7 @@ final class HomeController: UIViewController {
     @objc private func actionButtonPressed() {
         switch actionButtonConfig {
         case .showMenu:
-            print("DEBUG: Show menu")
+            delegate?.handleMenuToggle()
         case .dismissActionView:
             removeAnnotationsAndOverlays()
             mapView.showAnnotations(mapView.annotations, animated: true)
