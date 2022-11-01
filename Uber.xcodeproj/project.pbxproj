@@ -29,6 +29,8 @@
 		08F999A12910618700EB71E7 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F999A02910618700EB71E7 /* MenuController.swift */; };
 		08F999A32910619B00EB71E7 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F999A22910619B00EB71E7 /* ContainerController.swift */; };
 		08F999A529106B7800EB71E7 /* MenuHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F999A429106B7800EB71E7 /* MenuHeader.swift */; };
+		08F999A729114E4000EB71E7 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F999A629114E4000EB71E7 /* SettingsController.swift */; };
+		08F999A9291154BD00EB71E7 /* UserInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F999A8291154BD00EB71E7 /* UserInfoHeader.swift */; };
 		DC72B1C51B32DAE0F58B08A0 /* Pods_Uber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC41DE731152154443E1EFBC /* Pods_Uber.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		08F999A02910618700EB71E7 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		08F999A22910619B00EB71E7 /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		08F999A429106B7800EB71E7 /* MenuHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeader.swift; sourceTree = "<group>"; };
+		08F999A629114E4000EB71E7 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		08F999A8291154BD00EB71E7 /* UserInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeader.swift; sourceTree = "<group>"; };
 		7966522B37F2C1E0F9973980 /* Pods-Uber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Uber.debug.xcconfig"; path = "Target Support Files/Pods-Uber/Pods-Uber.debug.xcconfig"; sourceTree = "<group>"; };
 		DA68C3209809F79F950D4EC9 /* Pods-Uber.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Uber.release.xcconfig"; path = "Target Support Files/Pods-Uber/Pods-Uber.release.xcconfig"; sourceTree = "<group>"; };
 		DC41DE731152154443E1EFBC /* Pods_Uber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Uber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +145,7 @@
 				08F9999E2910616300EB71E7 /* Authentication */,
 				08F503E128F82AE400E254D2 /* HomeController.swift */,
 				08F0BB592909723100A6878E /* PickupController.swift */,
+				08F999A629114E4000EB71E7 /* SettingsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 				08F503E528F86A9400E254D2 /* LocationInputView.swift */,
 				08E8422F2907EEA900A09645 /* RideActionView.swift */,
 				08F999A429106B7800EB71E7 /* MenuHeader.swift */,
+				08F999A8291154BD00EB71E7 /* UserInfoHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -311,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08F0BB58290943DC00A6878E /* Trip.swift in Sources */,
+				08F999A9291154BD00EB71E7 /* UserInfoHeader.swift in Sources */,
 				08F999A12910618700EB71E7 /* MenuController.swift in Sources */,
 				08F0BB5A2909723100A6878E /* PickupController.swift in Sources */,
 				080FBDB428F5634500D71902 /* LoginController.swift in Sources */,
@@ -326,6 +333,7 @@
 				08F503E628F86A9400E254D2 /* LocationInputView.swift in Sources */,
 				080FBDF528F6E3B800D71902 /* SignUpController.swift in Sources */,
 				08E842302907EEA900A09645 /* RideActionView.swift in Sources */,
+				08F999A729114E4000EB71E7 /* SettingsController.swift in Sources */,
 				08F999A529106B7800EB71E7 /* MenuHeader.swift in Sources */,
 				0820BF8A28FDF0C900445D0C /* User.swift in Sources */,
 				08F999A32910619B00EB71E7 /* ContainerController.swift in Sources */,
