@@ -91,9 +91,8 @@ final class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkIfUserIsLoggedIn()
         enableLocationServices()
-        //        signOut()
+        configureUI()
     }
     
     //MARK: - Selectors
@@ -206,34 +205,6 @@ final class HomeController: UIViewController {
             self.centerMapOnUserLocation()
             self.showMessage("The trip has been cancelled.", withTitle: "Sorry")
         }
-    }
-    
-    //MARK: - Shared API
-    
-    private func checkIfUserIsLoggedIn() {
-        if let _ = Auth.auth().currentUser?.uid {
-            configure()
-        } else {
-            DispatchQueue.main.async {
-                let nav = UINavigationController(rootViewController: LoginController())
-                nav.modalPresentationStyle = .fullScreen
-                self.present(nav, animated: true)
-            }
-        }
-    }
-    
-    private func signOut() {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            self.showAlert(error: error)
-        }
-    }
-    
-    //MARK: - Helpers
-    
-    func configure() {
-        configureUI()
     }
     
     private func configureActionButton(config: ActionButtonConfiguration) {

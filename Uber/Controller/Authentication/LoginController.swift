@@ -82,7 +82,7 @@ final class LoginController: UIViewController {
                 self?.showAlert(error: error)
             } else {
                 self?.showMessage("Successfully Logged In") {
-                    guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController else { return }
+                    guard let controller = UIApplication.shared.keyWindow?.rootViewController as? ContainerController else { return }
                     controller.configure()
                     self?.dismiss(animated: true)
                 }
