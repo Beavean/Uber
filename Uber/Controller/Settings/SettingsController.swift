@@ -9,6 +9,10 @@ import UIKit
 
 private let reuseIdentifier = "LocationCell"
 
+protocol SettingsControllerDelegate: AnyObject {
+    func updateUser(_ controller: SettingsController)
+}
+
 enum LocationType: Int, CaseIterable, CustomStringConvertible {
     case home
     case work
@@ -36,8 +40,10 @@ class SettingsController: UITableViewController {
     
     //MARK: - Properties
     
-    private var user: User
+    var user: User
     private let locationManager = LocationHandler.shared.locationManager
+    weak var delegate: SettingsControllerDelegate?
+    var userInfoUpdated = false
     
     private lazy var infoHeader: UserInfoHeader = {
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
@@ -65,6 +71,9 @@ class SettingsController: UITableViewController {
     //MARK: - Selectors
     
     @objc private func handleDismissal() {
+        if userInfoUpdated {
+            delegate?.updateUser(self)
+        }
         self.dismiss(animated: true)
     }
     
@@ -151,6 +160,7 @@ extension SettingsController: AddLocationControllerDelegate {
             if let error = error {
                 self?.showAlert(error: error)
             }
+            self?.userInfoUpdated = true
             self?.dismiss(animated: true)
             switch type {
             case .home:

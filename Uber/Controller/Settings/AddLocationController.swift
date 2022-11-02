@@ -90,7 +90,7 @@ extension AddLocationController {
         let result = searchResults[indexPath.row]
         let title = result.title
         let subtitle = result.subtitle
-        var locationString = title + " " + subtitle
+        let locationString = title + " " + subtitle
         delegate?.updateLocation(locationString: locationString, type: type)
     }
 }

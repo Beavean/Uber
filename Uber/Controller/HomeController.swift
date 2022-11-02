@@ -44,6 +44,7 @@ final class HomeController: UIViewController {
     private let inputActivationView = LocationInputActivationView()
     private let locationInputView = LocationInputView()
     private let tableView = UITableView()
+    private var savedLocations = [MKPlacemark]()
     
     weak var delegate: HomeControllerDelegate?
     
@@ -58,6 +59,7 @@ final class HomeController: UIViewController {
                 fetchDrivers()
                 configureLocationInputActivationView()
                 observeCurrentTrip()
+                configureSavedUserLocations()
             } else {
                 observeTrips()
             }
@@ -215,6 +217,30 @@ final class HomeController: UIViewController {
         case .dismissActionView:
             actionButton.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             actionButtonConfig = .dismissActionView
+        }
+    }
+    
+    func configureSavedUserLocations() {
+        guard let user else { return }
+        savedLocations.removeAll()
+        if let homeLocation = user.homeLocation {
+            geocodeAddressString(address: homeLocation)
+        }
+        if let workLocation = user.workLocation {
+            geocodeAddressString(address: workLocation)
+        }
+    }
+    
+    func geocodeAddressString(address: String) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { [weak self] placemarks, error in
+            if let error {
+                self?.showAlert(title: "Error receiving search results", error: error)
+            }
+            guard let clPlacemark = placemarks?.first else { return }
+            let placemark = MKPlacemark(placemark: clPlacemark)
+            self?.savedLocations.append(placemark)
+            self?.tableView.reloadData()
         }
     }
     
@@ -499,23 +525,21 @@ extension HomeController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Favourite" : "Nearest"
+        return section == 0 ? "Saved locations" : "Search results"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 2 : searchResults.count
+        return section == 0 ? savedLocations.count : searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? LocationCell else { return UITableViewCell() }
-        if indexPath.section == 1 {
-            cell.placemark = searchResults[indexPath.row]
-        }
+        cell.placemark = indexPath.section == 0 ? savedLocations[indexPath.row] : searchResults[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedPlacemark = searchResults[indexPath.row]
+        let selectedPlacemark = indexPath.section == 0 ? savedLocations[indexPath.row] : searchResults[indexPath.row]
         configureActionButton(config: .dismissActionView)
         let destination = MKMapItem(placemark: selectedPlacemark)
         generatePolyline(toDestination: destination)

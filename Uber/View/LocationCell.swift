@@ -15,7 +15,7 @@ class LocationCell: UITableViewCell {
     var placemark: MKPlacemark? {
         didSet {
             titleLabel.text = placemark?.name
-            addressLabel.text = placemark?.address
+            addressLabel.text = placemark?.title
         }
     }
     
