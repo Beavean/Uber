@@ -100,15 +100,15 @@ class SignUpController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        print("DEBUG: Location is  \(location)")
+        print("DEBUG: Location is  \(String(describing: location))")
     }
     
     //MARK: - Selectors
     
     @objc private func handleSignUp() {
         guard let email = emailTextField.text,
-        let password = passwordTextField.text,
-        let fullName = fullNameTextField.text
+              let password = passwordTextField.text,
+              let fullName = fullNameTextField.text
         else { return }
         let accountTypeIndex = accountTypeSegmentedControl.selectedSegmentIndex
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
@@ -143,7 +143,12 @@ class SignUpController: UIViewController {
                 self?.showAlert(error: error)
             } else {
                 self?.showMessage("Registration successful") {
-                    guard let controller = UIApplication.shared.keyWindow?.rootViewController as? ContainerController else { return }
+                    guard let controller = UIApplication.shared.connectedScenes
+                        .filter({$0.activationState == .foregroundActive})
+                        .compactMap({$0 as? UIWindowScene})
+                        .first?.windows
+                        .filter({$0.isKeyWindow}).first?
+                        .rootViewController as? ContainerController else { return }
                     controller.configure()
                     self?.dismiss(animated: true)
                 }

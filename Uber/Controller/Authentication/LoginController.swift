@@ -82,7 +82,12 @@ final class LoginController: UIViewController {
                 self?.showAlert(error: error)
             } else {
                 self?.showMessage("Successfully Logged In") {
-                    guard let controller = UIApplication.shared.keyWindow?.rootViewController as? ContainerController else { return }
+                    guard let controller = UIApplication.shared.connectedScenes
+                        .filter({$0.activationState == .foregroundActive})
+                        .compactMap({$0 as? UIWindowScene})
+                        .first?.windows
+                        .filter({$0.isKeyWindow}).first?
+                        .rootViewController as? ContainerController else { return }
                     controller.configure()
                     self?.dismiss(animated: true)
                 }
