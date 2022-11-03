@@ -34,11 +34,13 @@ class MenuController: UITableViewController {
     
     //MARK: - Properties
     
+    private let headerHeight: CGFloat = 140
+    private let rowHeight: CGFloat = 60
     private let user: User
     weak var delegate: MenuControllerDelegate?
     
     private lazy var menuHeader: MenuHeader = {
-        let frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 140)
+        let frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: headerHeight)
         let view = MenuHeader(user: user, frame: frame)
         return view
     }()
@@ -70,7 +72,7 @@ class MenuController: UITableViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
-        tableView.rowHeight = 60
+        tableView.rowHeight = rowHeight
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.tableHeaderView = menuHeader
     }

@@ -18,6 +18,7 @@ class AddLocationController: UITableViewController {
     
     //MARK: - Properties
     
+    private let searchRegionDistance: CLLocationDistance = 500
     weak var delegate: AddLocationControllerDelegate?
     private let searchBar = UISearchBar()
     private let searchCompleter = MKLocalSearchCompleter()
@@ -64,7 +65,7 @@ class AddLocationController: UITableViewController {
     }
     
     private func configureSearchCompleter() {
-        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 2000, longitudinalMeters: 2000)
+        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: searchRegionDistance, longitudinalMeters: searchRegionDistance)
         searchCompleter.region = region
         searchCompleter.delegate = self
     }

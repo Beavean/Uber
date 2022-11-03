@@ -40,13 +40,15 @@ class SettingsController: UITableViewController {
     
     //MARK: - Properties
     
+    private let headerHeight: CGFloat = 100
+    private let defaultPadding: CGFloat = 16
     var user: User
     private let locationManager = LocationHandler.shared.locationManager
     weak var delegate: SettingsControllerDelegate?
     var userInfoUpdated = false
     
     private lazy var infoHeader: UserInfoHeader = {
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerHeight)
         let view = UserInfoHeader(user: user, frame: frame)
         return view
     }()
@@ -123,7 +125,7 @@ extension SettingsController {
         title.textColor = .white
         title.text = "Favorites"
         view.addSubview(title)
-        title.centerY(inView: view, leftAnchor: view.leftAnchor, paddingLeft: 16)
+        title.centerY(inView: view, leftAnchor: view.leftAnchor, paddingLeft: defaultPadding)
         return view
     }
     

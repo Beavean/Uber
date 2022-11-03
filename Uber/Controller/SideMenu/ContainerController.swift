@@ -53,15 +53,20 @@ class ContainerController: UIViewController {
         if let _ = Auth.auth().currentUser?.uid {
             configure()
         } else {
-            DispatchQueue.main.async {
-                let nav = UINavigationController(rootViewController: LoginController())
-                nav.modalPresentationStyle = .fullScreen
-                self.present(nav, animated: true)
-            }
+            self.presentLoginController()
         }
     }
     
     //MARK: - Helpers
+    
+    private func presentLoginController() {
+        DispatchQueue.main.async {
+            let nav = UINavigationController(rootViewController: LoginController())
+            nav.isModalInPresentation = true
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true)
+        }
+    }
     
     private func fetchUserData() {
         guard let currentUid = Auth.auth().currentUser?.uid else { return  }
@@ -73,6 +78,7 @@ class ContainerController: UIViewController {
     private func signOut() {
         do {
             try Auth.auth().signOut()
+            presentLoginController()
         } catch {
             self.showAlert(error: error)
         }

@@ -96,7 +96,13 @@ class PickupController: UIViewController {
     @objc private func animateProgress() {
         circularProgressView.animatePulsatingLayer()
         circularProgressView.setProgressWithAnimation(duration: 20, value: 0) { [weak self] in
-            self?.dismiss(animated: true)
+            guard let trip = self?.trip else { return }
+            DriverService.shared.updateTripState(trip: trip, state: .denied) { error, reference in
+                if let error = error {
+                    self?.showAlert(error: error)
+                }
+                self?.dismiss(animated: true)
+            }
         }
     }
     

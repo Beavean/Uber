@@ -123,6 +123,18 @@ final class HomeController: UIViewController {
             switch state {
             case .requested:
                 break
+            case .denied:
+                self?.shouldPresentLoadingView(false)
+                self?.showMessage("There is no available driver for your trip", withTitle: "Sorry")
+                PassengerService.shared.deleteTrip { error, reference in
+                    if let error {
+                        self?.showAlert(error: error)
+                    }
+                    self?.centerMapOnUserLocation()
+                    self?.configureActionButton(config: .showMenu)
+                    self?.inputActivationView.alpha = 1
+                    self?.removeAnnotationsAndOverlays()
+                }
             case .accepted:
                 self?.shouldPresentLoadingView(false)
                 self?.removeAnnotationsAndOverlays()
@@ -174,7 +186,6 @@ final class HomeController: UIViewController {
         PassengerService.shared.fetchDrivers(location: location) { [weak self] driver in
             guard let coordinate = driver.location?.coordinate else { return }
             let annotation = DriverAnnotation(uid: driver.uid, coordinate: coordinate)
-            print("DEBUG: Driver coordinate is  \(coordinate)")
             var driverIsVisible: Bool {
                 return self?.mapView.annotations.contains { annotation in
                     guard let driverAnnotation = annotation as? DriverAnnotation else { return false }
@@ -469,17 +480,14 @@ private func enableLocationServices() {
     locationManager?.delegate = self
     switch locationManager?.authorizationStatus {
     case .authorizedAlways:
-        print("DEBUG: Authorised always")
         locationManager?.startUpdatingLocation()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
     case .authorizedWhenInUse:
-        print("DEBUG: Authorised when in use")
         locationManager?.requestAlwaysAuthorization()
     case .denied:
         break
     case .notDetermined:
         locationManager?.requestWhenInUseAuthorization()
-        print("DEBUG: Not determined")
     case .restricted:
         break
     case .none:
