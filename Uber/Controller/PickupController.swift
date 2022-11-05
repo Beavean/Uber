@@ -22,13 +22,11 @@ class PickupController: UIViewController {
     private lazy var circularProgressView: CircularProgressView = {
         let frame = CGRect(x: 0, y: 0, width: 360, height: 360)
         let circularProgressView = CircularProgressView(frame: frame)
-        
         circularProgressView.addSubview(mapView)
         mapView.setDimensions(height: 268, width: 268)
         mapView.layer.cornerRadius = 268 / 2
         mapView.centerX(inView: circularProgressView)
         mapView.centerY(inView: circularProgressView, constant: 32)
-        
         return circularProgressView
     }()
     

@@ -7,8 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "LocationCell"
-
 protocol SettingsControllerDelegate: AnyObject {
     func updateUser(_ controller: SettingsController)
 }
@@ -92,7 +90,7 @@ class SettingsController: UITableViewController {
     
     private func configureTableView() {
         tableView.rowHeight = 60
-        tableView.register(LocationCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(LocationCell.self, forCellReuseIdentifier: K.UI.locationCellReuseIdentifier)
         tableView.backgroundColor = .white
         tableView.tableHeaderView = infoHeader
         tableView.tableFooterView = UIView()
@@ -134,7 +132,7 @@ extension SettingsController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? LocationCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.UI.locationCellReuseIdentifier, for: indexPath) as? LocationCell,
               let type = LocationType(rawValue: indexPath.row)
         else { return UITableViewCell() }
         cell.titleLabel.text = type.description

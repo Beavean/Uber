@@ -11,13 +11,6 @@ class MenuHeader: UIView {
     
     //MARK: - Properties
     
-//    var user: User? {
-//        didSet {
-//            fullNameLabel.text = user?.fullName
-//            emailLabel.text = user?.email
-//        }
-//    }
-    
     private let user: User
     
     private lazy var profileImageView: UIView = {
@@ -73,8 +66,4 @@ class MenuHeader: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //MARK: - Selectors
-    
-
 }

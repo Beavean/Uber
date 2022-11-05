@@ -9,7 +9,6 @@ import UIKit
 import Firebase
 import MapKit
 
-private let reuseIdentifier = "LocationCell"
 private let annotationIdentifier = "DriverAnnotation"
 
 private enum ActionButtonConfiguration {
@@ -307,7 +306,7 @@ final class HomeController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.keyboardDismissMode = .onDrag
-        tableView.register(LocationCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(LocationCell.self, forCellReuseIdentifier: K.UI.locationCellReuseIdentifier)
         tableView.rowHeight = 60
         tableView.tableFooterView = UIView()
         let height = view.frame.height - locationInputViewHeight
@@ -541,7 +540,7 @@ extension HomeController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? LocationCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.UI.locationCellReuseIdentifier, for: indexPath) as? LocationCell else { return UITableViewCell() }
         cell.placemark = indexPath.section == 0 ? savedLocations[indexPath.row] : searchResults[indexPath.row]
         return cell
     }

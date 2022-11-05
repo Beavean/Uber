@@ -119,7 +119,7 @@ class SignUpController: UIViewController {
                               "fullName": fullName,
                               "accountType": accountTypeIndex] as [String: Any]
                 if accountTypeIndex == 1 {
-                    let geoFire = GeoFire(firebaseRef: REF_DRIVER_LOCATIONS)
+                    let geoFire = GeoFire(firebaseRef: K.FB.driverLocationsReference)
                     guard let location = self?.location else { return }
                     geoFire.setLocation(location, forKey: uid) { error in
                         self?.uploadUserDataAndShowHomeController(uid: uid, values: values)
@@ -137,7 +137,7 @@ class SignUpController: UIViewController {
     //MARK: - Helpers
     
     private func uploadUserDataAndShowHomeController(uid: String, values: [String: Any]) {
-        REF_USERS.child(uid).updateChildValues(values) { [weak self] error, reference in
+        K.FB.usersReference.child(uid).updateChildValues(values) { [weak self] error, reference in
             if let error = error {
                 self?.showAlert(error: error)
             } else {

@@ -8,8 +8,6 @@
 import UIKit
 import MapKit
 
-private let reuseIdentifier = "Cell"
-
 protocol AddLocationControllerDelegate: AnyObject {
     func updateLocation(locationString: String, type: LocationType)
 }
@@ -18,6 +16,7 @@ class AddLocationController: UITableViewController {
     
     //MARK: - Properties
     
+    private let reuseIdentifier = "Cell"
     private let searchRegionDistance: CLLocationDistance = 500
     weak var delegate: AddLocationControllerDelegate?
     private let searchBar = UISearchBar()

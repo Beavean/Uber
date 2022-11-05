@@ -7,8 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "MenuCell"
-
 enum MenuOptions: Int, CaseIterable, CustomStringConvertible {
     case yourTrips
     case settings
@@ -34,6 +32,7 @@ class MenuController: UITableViewController {
     
     //MARK: - Properties
     
+    private let reuseIdentifier = "MenuCell"
     private let headerHeight: CGFloat = 140
     private let rowHeight: CGFloat = 60
     private let user: User
@@ -61,10 +60,6 @@ class MenuController: UITableViewController {
         view.backgroundColor = .white
         configureTableView()
     }
-    
-    //MARK: - Selectors
-    
-    
     
     //MARK: - Helpers
     

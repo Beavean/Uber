@@ -19,6 +19,7 @@
 		0820BF8A28FDF0C900445D0C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820BF8928FDF0C900445D0C /* User.swift */; };
 		0820BF8C28FECD0B00445D0C /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820BF8B28FECD0B00445D0C /* LocationHandler.swift */; };
 		0820BF8E28FF3F0300445D0C /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820BF8D28FF3F0300445D0C /* DriverAnnotation.swift */; };
+		084E3D872917028000EC243D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E3D862917028000EC243D /* Constants.swift */; };
 		0867E03729129C5000D47534 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0867E03629129C5000D47534 /* CircularProgressView.swift */; };
 		08E842302907EEA900A09645 /* RideActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8422F2907EEA900A09645 /* RideActionView.swift */; };
 		08F0BB58290943DC00A6878E /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F0BB57290943DC00A6878E /* Trip.swift */; };
@@ -51,6 +52,7 @@
 		0820BF8928FDF0C900445D0C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0820BF8B28FECD0B00445D0C /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		0820BF8D28FF3F0300445D0C /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
+		084E3D862917028000EC243D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0867E03629129C5000D47534 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		08E8422F2907EEA900A09645 /* RideActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideActionView.swift; sourceTree = "<group>"; };
 		08F0BB57290943DC00A6878E /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
@@ -111,16 +113,13 @@
 		080FBDAE28F5634500D71902 /* Uber */ = {
 			isa = PBXGroup;
 			children = (
+				080FBDAF28F5634500D71902 /* AppDelegate.swift */,
 				080FBDCB28F56A6700D71902 /* Model */,
 				080FBDCA28F56A6500D71902 /* View */,
 				080FBDC828F56A5C00D71902 /* Controller */,
 				080FBDC628F56A5500D71902 /* Service */,
 				080FBDC728F56A5700D71902 /* Utils */,
-				080FBDAF28F5634500D71902 /* AppDelegate.swift */,
-				080FBDB828F5634700D71902 /* Assets.xcassets */,
-				080FBDBA28F5634700D71902 /* LaunchScreen.storyboard */,
-				080FBDBD28F5634700D71902 /* Info.plist */,
-				08F503DF28F813F800E254D2 /* GoogleService-Info.plist */,
+				084E3D852917017100EC243D /* Files */,
 			);
 			path = Uber;
 			sourceTree = "<group>";
@@ -138,6 +137,7 @@
 			children = (
 				080FBDCC28F5759900D71902 /* Extensions.swift */,
 				0820BF8B28FECD0B00445D0C /* LocationHandler.swift */,
+				084E3D862917028000EC243D /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -177,6 +177,17 @@
 				08F0BB57290943DC00A6878E /* Trip.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		084E3D852917017100EC243D /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				080FBDB828F5634700D71902 /* Assets.xcassets */,
+				080FBDBA28F5634700D71902 /* LaunchScreen.storyboard */,
+				080FBDBD28F5634700D71902 /* Info.plist */,
+				08F503DF28F813F800E254D2 /* GoogleService-Info.plist */,
+			);
+			name = Files;
 			sourceTree = "<group>";
 		};
 		08F9999E2910616300EB71E7 /* Authentication */ = {
@@ -353,6 +364,7 @@
 				08F999A529106B7800EB71E7 /* MenuHeader.swift in Sources */,
 				0820BF8A28FDF0C900445D0C /* User.swift in Sources */,
 				08F999A32910619B00EB71E7 /* ContainerController.swift in Sources */,
+				084E3D872917028000EC243D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
